@@ -1,0 +1,265 @@
+@startuml
+
+interface Game{}
+class Camino{
+    - fila: int
+    - columna: int
+    - indice: int
+    + getFila():int
+    + getColumna(): int
+    + getIndice(): int
+}
+
+class Comida{
+    - fila: int
+    - columna: int
+    - indice: int
+    - hitbox: Rentangle
+    + getFila():int
+    + getColumna(): int
+    + getIndice(): int
+    + getHitbox(): Rentangle
+}
+
+class Coordenadas{
+    - fila: int
+    - columna: int
+    - indice: int
+    + getFila():int
+    + getColumna(): int
+    + getIndice(): int
+    + getCoordenadas(): Coordenadas
+}
+
+class Fantasma{
+    - x: int
+    - y: int
+    - initX: int
+    - initY: int
+    - hitbox: Rentangle
+    - direccion: Direcciones
+    - actLaberinto: Laberinto
+    - jugador: Jugador
+    - puedeMoverse: boolean
+    + reiniciar(): void
+    + comer(Jugador): boolean
+    + mover(): void
+    + getSiguienteDireccion(): void
+    + golpeaPared(Direccioes): boolean
+    + getHitbox(): Rentangle
+    + getX(): int
+    + getY(): int
+    + setMover()
+}
+
+class Fruta{
+    - fila: int
+    - columna: int
+    - indice: int
+    - hitbox: Rentangle
+    + getFila():int
+    + getColumna(): int
+    + getIndice(): int
+    + getHitbox(): Rentangle
+}
+
+class Jugador{
+    - x: int
+    - y: int
+    - initX: int
+    - initY: int
+    - direccion: Direcciones
+    - tienePoder: boolean
+    - golpeaPared: boolean
+    - hitbox: Rentangle
+    + reiniciar(): void
+    + mover(): void
+    + cambiarDireccion(Direcciones): void
+    + getHitbox(): Rentangle
+    + come(Comestible): boolean
+    + getX(): int
+    + getY(): int
+    + getDireccion(): Direcciones
+    + estaGolpeandoPared(): boolean
+    + setGolpeaPared(): void
+    + estaMoviendose(): boolean
+    + setPoder(): void
+}
+
+abstract class Fantasma{
+    - x: int
+    - y: int
+    - initX: int
+    - initY: int
+    - hitbox: Rentangle
+    - direccion: Direcciones
+    - actLaberinto: Laberinto
+    - jugador: Jugador
+    - puedeMoverse:  boolean
+    + reiniciar(): boolean
+    + comer(Jugador): boolean
+    + mover(): void
+    + getSiguienteDireccion(): void
+    + golpeaPared(Direccioes): boolean
+    + getHitbox(): Rentangle
+    + getX(): int
+    + getY(): int
+    + setMover(): void
+}
+
+
+class Pinky{
+    + getSiguienteDireccion(): void
+    + calcularDistancia(): double
+}
+class Inky{
+    + getSiguienteDireccion(): void
+    + calcularDistancia(): double
+}
+class Blinky{
+    + getSiguienteDireccion(): void
+}
+class Clyde{
+    + getSiguienteDireccion(): void
+}
+
+
+
+class Laberinto{
+    - fila: int
+    - columna: int
+    - laberintoArray: ArrayList<String>
+    + getLaberinto(): ArrayList<String>
+    + getFila(): int
+    + getColumna(): int
+}
+
+class Muro{
+    - fila: int
+    - columna: int
+    - indice: int
+    + getFila():int
+    + getColumna(): int
+    + getIndice(): int
+}
+
+class Juego{
+    + ALTURA_PANTALLA: int
+    + ANCHO_PANTALLA: int
+    + NRO_NIVELES: int
+    - listener: PlayerListener
+    - vidasJugador:int
+    - puntajeJugador:int
+    - puntajeTemp:int
+    - pausado: boolean
+    - nivelActual: int
+    - nivel:String[]
+    - curLaberinto: Laberinto
+    - jugador: Jugador
+    - listaFantasmas:ArrayList<Fantasma>
+    - listaFantasmasEnBase:ArrayList<Fantasma>
+    - listaFantasmasPorSalir:ArrayList<Fantasma>
+    - listaComida:ArrayList<Comida>
+    - listaFrutas:ArrayList<Fruta>
+    - listaPoder:ArrayList<Poder>
+    - listaMuro:ArrayList<Muro>
+    - listaCamino:ArrayList<Camino>
+    - frutaActual:Fruta
+    - curIndiceFrutas:int
+    - contadorComerFrutas:int
+    - timer:Timer
+    - actualizarFruta:boolean
+    + getPlayerScore():int
+    + getLives():int
+    + updateGame():void
+    + comerFantasma():void
+    + ordenarFantasma():void
+    + moverFantasma():void
+    + generarFrutaAleatoria():void
+    + comer():void
+    + moverJugador():void
+    + puedeCambiarDeDireccion():boolean
+    + verificarSiJugadorChocaConLaPared():void
+    + getJugador():Jugador
+    + isPaused():boolean
+    + checkForPause():void
+    + starNewGame():void
+    + listaComida():ArrayList<Comida>
+    + getListaComidas():ArrayList<Comida>
+    + generarListaFrutas():ArrayList<Fruta>
+    + generarListaPared():ArrayList<Pared>
+    + getListaPared(): ArrayList<Muro>
+    + generarListaCaminos(): ArrayList<Camino>
+    + getListaCaminos(): ArrayList<Camino>
+    + generarListaPoder(): ArrayList<Poder>
+    + getListaPoder(): ArrayList<Poder>
+    + generarJugador(): Jugador
+    + generarListaFantasmas(): ArrayList<Fantasma>
+    + getListaFantasma(): ArrayList<Fantasma>
+    + getNiveltxt(): String[]
+    + addPuntaje(): void
+    + getFrutaActual(): Fruta
+    + getNivel(): int
+    + getLaberintoActual(): Laberinto
+    + isLevelFinished(): boolean
+    + isPlayerAlive(): boolean
+    + resetDestroyedPlayed(): void
+    + moveToNextLevel(): void
+    + isGameOver(): boolean
+    + getScreenWidth(): int
+    + getScreenHeight(): int
+}
+
+class Poder{
+    - fila: int
+    - columna: int
+    - indice: int
+    - hitbox: Rentangle
+    + getFila():int
+    + getColumna(): int
+    + getIndice(): int
+    + getHitbox(): Rentangle
+}
+
+
+interface Comestible{
+    getHitbox(): Rentangle
+}
+
+Enum Direcciones{
+    + ARRIBA: Direcciones
+    + ABAJO: Direcciones
+    + IZQUIERDA: Direcciones
+    + DERECHA: Direcciones
+}
+
+Juego o--- Laberinto
+Juego *--- Camino
+Juego *--- Comida
+Juego *--- Fantasma
+Juego *--- Fruta
+Juego *--- Jugador
+Juego *--- Poder
+
+Laberinto *--- Muro
+Comida <|... Comestible
+Fruta ---|> Comida
+
+Fantasma --> Direcciones
+Jugador --> Direcciones
+Juego --> Direcciones
+
+Camino --> Coordenadas
+Comida --> Coordenadas
+Fantasma  --> Coordenadas
+Fruta --> Coordenadas
+Muro  --> Coordenadas
+Juego --> Coordenadas
+Poder --> Coordenadas
+
+Blinky --|> Fantasma
+Pinky --|> Fantasma
+Inky --|> Fantasma
+Clyde --|> Fantasma
+Juego <.. Game
+@enduml
